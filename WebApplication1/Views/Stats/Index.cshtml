@@ -1,0 +1,44 @@
+﻿@model WebApplication1.Models.ViewModels.StatsViewModel
+
+<h1>Stats</h1>
+
+Du har valgt fra @Model.Start.ToShortDateString() til
+@Model.End.ToShortDateString()
+
+<form method="post" asp-action="Index">
+    Fra data
+    <input asp-for="Start" type="text" />
+    til
+    <input asp-for="End" type="text" />
+
+    <button asp-action="Index">Oppdater</button>
+
+</form>
+
+<form method="post" asp-action="">
+    <input asp-for="Start" type="text"  />
+    <input asp-for="End" type="text" />
+    <input type="submit" asp-action="NewDate" asp-route-deltaStart="1" value="+1 start"/>
+    <button asp-action="NewDate" asp-route-deltaStart="-1">-1 start</button>
+    <button asp-action="NewDate" asp-route-deltaEnd="1">+1 end</button>
+    <button asp-action="NewDate" asp-route-deltaEnd="-1">-1 end</button>
+</form>
+
+
+<table>
+    <tr>
+        <th>
+            Dato
+        </th>
+        <th>
+            Verdi
+        </th>
+    </tr>
+    @foreach (var m in Model.Data)
+    {
+        <tr>
+            <td>@m.Date.ToShortDateString()</td>
+            <td align="right">@m.Value</td>
+        </tr>
+    }
+</table>
